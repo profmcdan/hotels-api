@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HotelsAPI.Configurations;
 using HotelsAPI.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -39,8 +40,16 @@ namespace HotelsAPI
                         .AllowAnyHeader()
                 );
             });
+            services.AddAutoMapper(typeof(MapperInitializer));
             services.AddControllers();
-            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "HotelsAPI", Version = "v1"}); });
+            services.AddSwaggerGen(
+                c =>
+                {
+                    c.SwaggerDoc("v1", new OpenApiInfo {
+                            Title = "HotelsAPI", 
+                            Version = "v1"
+                        });
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

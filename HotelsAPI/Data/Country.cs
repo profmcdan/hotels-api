@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace HotelsAPI.Data
 {
@@ -7,5 +8,7 @@ namespace HotelsAPI.Data
         public Guid Id { get; set; } = Guid.NewGuid();
         public string Name { get; set; }
         public string ShortName { get; set; }
+        
+        public virtual IList<Hotel> Hotels { get; set; }
     }
 }
