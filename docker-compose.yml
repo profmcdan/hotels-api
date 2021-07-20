@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+  hotelsapi:
+    image: ${DOCKER_REGISTRY-}hotelsapi
+    build:
+      context: .
+      dockerfile: HotelsAPI/Dockerfile
+
+  hoteldb:
+    image: "mcr.microsoft.com/mssql/server:2017-latest"
+
+volumes:
+  mssql_volume: ~

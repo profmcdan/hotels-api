@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  hotelsapi:
+    container_name: hotelsapi
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "DatabaseSettings:ConnectionString=Server=hoteldb;Port=1433;Database=HotelDB;User Id=sa;Password=admin@1234;"
+    ports:
+      - 6001:80
+    volumes:
+      - ~/.aspnet/https:/root/.aspnet/https:ro
+      - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+    depends_on:
+      - hoteldb
+    
+  hoteldb:
+    container_name: hoteldb
+    restart: always
+    environment:
+      - SA_PASSWORD=admin@1234
+      - ACCEPT_EULA=Y
+      - MSSQL_PID=Express
+    ports:
+      - "8033:1433"
+    volumes:
+      - mssql_volume:/var/opt/mssql
